@@ -14,7 +14,7 @@ const allBooks: RequestHandler = async (
   next: NextFunction,
 ) => {
   try {
-    res.json(await BookService.findAll());
+    res.json(await BookService.findAllBooks());
   } catch (err: any) {
     next(new NotFoundError('Could not find any book.', err));
   }
@@ -38,7 +38,7 @@ const createBook: RequestHandler = async (
       publisher,
     });
 
-    await BookService.create(book);
+    await BookService.createBook(book);
     res.json({ msg: 'Book created successfully', book });
   } catch (err: any) {
     if (err.name === 'ValidationError') {
@@ -49,4 +49,30 @@ const createBook: RequestHandler = async (
   }
 };
 
-export default { allBooks, createBook };
+const getBook = async (req: Request, res: Response, next: NextFunction) => {
+  const book = await BookService.findBookById(req.params.bookId);
+
+  return res.json({ book });
+};
+
+const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const update = req.body;
+    const bookId = req.params.bookId;
+    const updatedBook = await BookService.updateBook(bookId, update);
+    res.json({ msg: 'Book updated successfully', updatedBook });
+  } catch (err: any) {
+    next(new NotFoundError('Book Not Found', err));
+  }
+};
+
+const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await BookService.deleteBook(req.params.bookId);
+    return res.status(204).json({ msg: 'Book entry deleted successfully' });
+  } catch (err: any) {
+    next(new NotFoundError(' Book not found', err));
+  }
+};
+
+export default { allBooks, createBook, getBook, updateBook, deleteBook };
