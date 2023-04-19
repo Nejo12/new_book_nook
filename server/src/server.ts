@@ -1,26 +1,15 @@
-import 'dotenv/config';
-import mongoose from 'mongoose';
-import express from 'express';
+import app from './app';
 
-import env from '../src/util/validate_env';
-
-import BookModel from './models/Book';
-
-const app = express();
-
-app.get('/', async (req, res) => {
-  const books = await BookModel.find().exec();
-  res.status(200).json(books);
+/**
+ * Start Express server.
+ */
+const server = app.listen(app.get('port'), () => {
+  console.log(
+    '  App is running at http://localhost:%d in %s mode',
+    app.get('port'),
+    app.get('env'),
+  );
+  console.log('  Press CTRL-C to stop\n');
 });
 
-const port = env.PORT;
-
-mongoose
-  .connect(env.MONGODB_URI)
-  .then(() => {
-    console.log('Mongoose Connected');
-    app.listen(port, () => {
-      console.log('Server is running on port: ' + port);
-    });
-  })
-  .catch(console.error);
+export default server;
