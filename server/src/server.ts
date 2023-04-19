@@ -4,10 +4,13 @@ import express from 'express';
 
 import env from '../src/util/validate_env';
 
+import BookModel from './models/Book';
+
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Testing Hello World.');
+app.get('/', async (req, res) => {
+  const books = await BookModel.find().exec();
+  res.status(200).json(books);
 });
 
 const port = env.PORT;
