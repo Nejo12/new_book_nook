@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
+import mongoose from 'mongoose';
 
 import {
   NotFoundError,
@@ -7,6 +8,16 @@ import {
 } from '../helpers/apiError';
 import Book from '../models/Book';
 import BookService from '../services/book';
+
+interface ICreateBookBody {
+  title?: string;
+  isbn?: string;
+  author?: string;
+  copies?: number;
+  description?: string;
+  publishedDate?: Date;
+  publisher?: string;
+}
 
 const allBooks: RequestHandler = async (
   req: Request,
@@ -25,9 +36,21 @@ const createBook: RequestHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { title, isbn, author, copies, description, publishedDate, publisher } =
-    req.body;
+  const {
+    title,
+    isbn,
+    author,
+    copies,
+    description,
+    publishedDate,
+    publisher,
+  }: ICreateBookBody = req.body;
   try {
+    if (!title) next(new BadRequestError('New Book must have a title.'));
+    if (!isbn) next(new BadRequestError('New Book must have an ISBN.'));
+    if (!author) next(new BadRequestError('New Book must have an Author.'));
+    if (!copies)
+      next(new BadRequestError('New Book must have number of copies.'));
     const book = new Book({
       title,
       isbn,
@@ -49,13 +72,25 @@ const createBook: RequestHandler = async (
   }
 };
 
-const getBook = async (req: Request, res: Response, next: NextFunction) => {
-  const book = await BookService.findBookById(req.params.bookId);
+const getBook: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const bookId = req.params.bookId;
+  const book = await BookService.findBookById(bookId);
 
+  if (!mongoose.isValidObjectId(bookId)) {
+    next(new NotFoundError('Invalid book id'));
+  }
   return res.json({ book });
 };
 
-const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+const updateBook: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const update = req.body;
     const bookId = req.params.bookId;
@@ -66,7 +101,11 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
+const deleteBook: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     await BookService.deleteBook(req.params.bookId);
     return res.status(204).json({ msg: 'Book entry deleted successfully' });
