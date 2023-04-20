@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import routers from './routers';
 import connectDB from './config/db';
@@ -8,6 +9,7 @@ import env from '../src/util/validate_env';
 
 const app = express();
 
+app.use(cors());
 app.use(morgan('dev'));
 
 connectDB();
