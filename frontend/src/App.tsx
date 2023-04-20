@@ -1,5 +1,5 @@
-import './App.css';
+import Routes from './Routes';
 
-const App = () => <div className='App'>Frontend with React</div>;
+const App = () => <Routes />;
 
 export default App;
