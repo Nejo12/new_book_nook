@@ -6,10 +6,11 @@ export type AppState = {
 // BOOK-STATE
 export type BookState = {
   bookProps: Book;
-  data: Book[];
+  bookList: Book[];
   loading: boolean;
   msg: string;
   error: string;
+  data: Book;
 };
 
 export type Book = {
@@ -39,4 +40,8 @@ export type ActionTypes = BookActionType | Payload;
 export type BookResponse = {
   book: Book;
   bookList: Book[];
+};
+
+export type BookDetailResponse = {
+  data: Book;
 };

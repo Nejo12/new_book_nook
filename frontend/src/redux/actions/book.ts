@@ -21,3 +21,25 @@ export const fetchBooksError = (error: unknown) => {
     payload: error,
   };
 };
+
+// FETCH BOOK DETAIL
+export const fetchBookDetail = (bookId: string) => {
+  return {
+    type: types.FETCH_BOOK_DETAIL,
+    payload: bookId,
+  };
+};
+
+export const fetchBookDetailSuccess = (data: Book) => {
+  return {
+    type: types.FETCH_BOOK_DETAIL_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchBookDetailFailure = (error: unknown) => {
+  return {
+    type: types.FETCH_BOOK_DETAIL_FAILURE,
+    payload: error,
+  };
+};
