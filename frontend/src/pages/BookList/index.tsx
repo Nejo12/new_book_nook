@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchBooksRequest } from '../../redux/actions/book';
 import { AppState, Book } from '../../types/types';
+import BookCard from '../../components/bookCard';
+import Spinner from '../../components/spinner';
 
 const BookList = (): JSX.Element => {
   const { data, loading } = useSelector((state: AppState) => state.bookState);
@@ -13,11 +15,12 @@ const BookList = (): JSX.Element => {
     dispatch(fetchBooksRequest());
   }, [dispatch]);
 
-  if (loading) <h1>Loading . . .</h1>;
+  if (loading) <Spinner />;
 
   return (
-    <div>
-      {data && data.map((book: Book) => <p key={uuidv4()}>{book.title}</p>)}
+    <div className='listContainer p-2'>
+      {data &&
+        data.map((book: Book) => <BookCard key={uuidv4()} bookData={book} />)}
     </div>
   );
 };

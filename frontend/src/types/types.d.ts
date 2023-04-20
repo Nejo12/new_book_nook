@@ -23,6 +23,11 @@ export type Book = {
   publishedDate: string;
 };
 
+// PROPS
+export type BookProps = {
+  bookData: Book;
+};
+
 export type BookActionType = {
   type: string;
   payload: string | boolean | BookResponse;
