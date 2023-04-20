@@ -5,7 +5,17 @@ const initialState: BookState = {
   loading: false,
   error: '',
   msg: '',
-  data: [],
+  bookList: [],
+  data: {
+    _id: '',
+    title: '',
+    isbn: '',
+    description: '',
+    copies: 0,
+    author: '',
+    publisher: '',
+    publishedDate: '',
+  },
   bookProps: {
     _id: '',
     title: '',
@@ -23,6 +33,7 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
 
   switch (action.type) {
     case types.FETCH_BOOKS_REQUEST:
+    case types.FETCH_BOOK_DETAIL:
       return {
         ...state,
         loading: true,
@@ -38,10 +49,20 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
       };
 
     case types.FETCH_BOOKS_ERROR:
+    case types.FETCH_BOOK_DETAIL_FAILURE:
       return {
         ...state,
         loading: false,
         errors: true,
+      };
+
+    case types.FETCH_BOOK_DETAIL_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        errors: false,
+        data: payload.book,
+        // bookProps: { ...payload.book },
       };
 
     default:
