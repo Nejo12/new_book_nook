@@ -13,6 +13,8 @@ const app = express();
 
 app.use(cors());
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cookieSession({
@@ -31,6 +33,7 @@ app.use(express.json());
 // Use routers
 app.use('/api/books', routers.books);
 app.use('/api/users', routers.users);
+app.use('/api/borrows', routers.borrows);
 
 // Custom API error handler
 app.use(apiErrorHandler);

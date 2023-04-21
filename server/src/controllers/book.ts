@@ -7,6 +7,7 @@ import {
   InternalServerError,
 } from '../helpers/apiError';
 import Book from '../models/Book';
+import Borrow from '../models/Borrow';
 import BookService from '../services/book';
 
 interface ICreateBookBody {
@@ -77,13 +78,36 @@ const getBook: RequestHandler = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const bookId = req.params.bookId;
+  const bookId = req.params.bookId as string;
+  const userId = req.query.userId as string;
+  let isBorrowed = false;
+  let _borrow = null;
+
   const book = await BookService.findBookById(bookId);
 
+  if (
+    typeof req.query['userId'] !== 'undefined' &&
+    req.query.userId !== 'undefined'
+  ) {
+    if (book) {
+      // const borrow = await BorrowService.findBorrowedBookByUserId(userId, bookId)
+      const borrow = await Borrow.find({
+        bookId,
+        userId,
+      });
+
+      if (borrow.length > 0) {
+        isBorrowed = true;
+        _borrow = borrow;
+      }
+    } else {
+      return res.status(404).json({ error: 'No book found' });
+    }
+  }
   if (!mongoose.isValidObjectId(bookId)) {
     next(new NotFoundError('Invalid book id'));
   }
-  return res.json({ book });
+  return res.json({ book, isBorrowed, borrow: _borrow });
 };
 
 const updateBook: RequestHandler = async (
