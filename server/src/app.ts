@@ -11,6 +11,7 @@ import apiErrorHandler from './middlewares/apiErrorHandler';
 
 const app = express();
 
+// Use common 3rd-party middlewares
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
