@@ -33,6 +33,12 @@ type IUser = Document & {
   role: string;
 };
 
+type BorrowDocument = Document & {
+  bookId: string;
+  userId: string;
+  timestamp: boolean;
+};
+
 type Errors = {
   firstName: string;
   lastName: string;
