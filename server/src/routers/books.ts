@@ -1,6 +1,8 @@
 import express from 'express';
 
 import book from '../controllers/book';
+import roles from '../middlewares/roles';
+import auth from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -11,8 +13,13 @@ router.get('/', book.allBooks);
 
 // @route       POST api/books
 // @description add/create/save book
-// @access      will be Private
-router.post('/', book.createBook);
+// @access      Private
+router.post(
+  '/',
+  auth,
+  roles.grantAccess('createOwn', 'profile'),
+  book.createBook,
+);
 
 // @route       GET api/books/:id
 // @description get single book by id
@@ -21,12 +28,22 @@ router.get('/:bookId', book.getBook);
 
 // @route       PUT api/books/:id
 // @description edit specific book by its Id
-// @access      will be Private
-router.put('/:bookId', book.updateBook);
+// @access      Private
+router.put(
+  '/:bookId',
+  auth,
+  roles.grantAccess('updateAny', 'profile'),
+  book.updateBook,
+);
 
 // @route       DELETE api/books/:id
 // @description delete book by id
-// @access      will be Private
-router.delete('/:bookId', book.deleteBook);
+// @access      Private
+router.delete(
+  '/:bookId',
+  auth,
+  roles.grantAccess('deleteAny', 'profile'),
+  book.deleteBook,
+);
 
 export default router;
