@@ -27,7 +27,7 @@ const BookCard = (props: BookProps) => {
       </p>
 
       <Link to={`/book-details/${_id}`}>
-        <button className='more'>View Details</button>
+        <button className='more submit'>View Details</button>
       </Link>
     </div>
   );

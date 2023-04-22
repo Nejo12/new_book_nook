@@ -84,18 +84,15 @@ const getBook: RequestHandler = async (
   let _borrow = null;
 
   const book = await BookService.findBookById(bookId);
-
   if (
     typeof req.query['userId'] !== 'undefined' &&
     req.query.userId !== 'undefined'
   ) {
     if (book) {
-      // const borrow = await BorrowService.findBorrowedBookByUserId(userId, bookId)
       const borrow = await Borrow.find({
-        bookId,
         userId,
+        bookId,
       });
-
       if (borrow.length > 0) {
         isBorrowed = true;
         _borrow = borrow;
