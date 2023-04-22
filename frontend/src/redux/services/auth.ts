@@ -17,7 +17,6 @@ export const registerUserService = async (form: any) => {
       REGISTER_API_ENDPOINT,
       formData,
     );
-    // console.log('check response in auth service: ', response);
     return response.user;
   } catch (err) {
     throw err;

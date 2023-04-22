@@ -8,7 +8,7 @@ import { UserState } from '../../types/types';
 function* fetchUserSaga() {
   try {
     const response: UserState = yield call(fetchUserService);
-    yield put(fetchUsersSuccess(response.userList));
+    yield put(fetchUsersSuccess(response));
   } catch (error) {
     yield put(fetchUsersFailure(error));
   }

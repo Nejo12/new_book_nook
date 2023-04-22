@@ -6,9 +6,15 @@ import { toast } from 'react-toastify';
 
 import { fetchBookDetail } from '../../redux/actions/book';
 import { borrowBook, returnBook } from '../../redux/actions/borrow';
-import { AppState, Book } from '../../types/types';
+import { AppState, Book, BookList } from '../../types/types';
 import Spinner from '../../components/spinner';
 import { url } from '../../Routes';
+import BookCard from '../../components/bookCard';
+
+interface IBorrowedBooks {
+  books: Book[];
+  borrowId: string[];
+}
 
 const BookDetail = (): JSX.Element => {
   const user = useSelector((state: AppState) => state.authState.user);
@@ -16,9 +22,6 @@ const BookDetail = (): JSX.Element => {
     (state: AppState) => state.bookState,
   );
   const bookState = useSelector((state: AppState) => state.bookState);
-  const borrowState = useSelector((state: AppState) => state.borrowState);
-  console.log('borrowState in book-detail: ', borrowState);
-  console.log('bookState in book-detail: ', bookState);
   // const { msg, error } = useSelector((state: AppState) => state.borrowState)
 
   const navigate = useNavigate();
@@ -74,62 +77,59 @@ const BookDetail = (): JSX.Element => {
   }
 
   return (
-    <div className='listContainer-details p-2'>
-      <Link to='/'>
+    <div className='page-container p-2'>
+      {/* <Link to='/'>
         <img
           src='https://img.icons8.com/wired/64/000000/circled-left-2.png'
           alt='back-btn'
           className='back engrave'
         />
-      </Link>
-      <br />
-      <p className='page-title lead emboss'>Book's Details </p>
+      </Link> */}
+      <div className='nowrap left'>
+        {bookProps?.copies ? (
+          <div className='emboss'>
+            <span className='note hide-md'>NOTE: </span> We have{' '}
+            <span className='copies lead'>
+              {' '}
+              {bookProps?.copies} {''}
+            </span>{' '}
+            copies left.
+          </div>
+        ) : null}
 
-      {bookProps?.copies ? (
-        <p className='emboss'>
-          <span className='note hide-md'>NOTE: </span> We have{' '}
-          <span className='copies lead'>
+        <div>
+          <span className='engrave lead'>Title: </span>{' '}
+          <span className='details lead'> {bookProps?.title}</span>
+        </div>
+        <div>
+          <span className='engrave lead'>Author: </span>
+          <span className='details lead'> {bookProps?.author}</span>
+        </div>
+
+        <div>
+          <span className='engrave lead'>Description: </span>
+          <span className='details lead'>{bookProps?.description}</span>
+        </div>
+
+        <div>
+          <span className='engrave lead'>ISBN: </span>
+          <span className='details lead'> {bookProps?.isbn}</span>
+        </div>
+        <div>
+          <span className='engrave lead'>Publisher: </span>
+          <span className='details lead'> {bookProps?.publisher}</span>
+        </div>
+        <div>
+          <span className='engrave lead'>Published on: </span>
+          <span className='details lead'>
             {' '}
-            {bookProps?.copies} {''}
-          </span>{' '}
-          copies left.
-        </p>
-      ) : null}
-      <br />
-      <br />
-      <br />
-      <div>
-        <span className='engrave lead'>Title: </span>{' '}
-        <span className='details lead'> {bookProps?.title}</span>
-      </div>
-      <div>
-        <span className='engrave lead'>Author: </span>
-        <span className='details lead'> {bookProps?.author}</span>
-      </div>
-      <br />
-      <div>
-        <span className='engrave lead'>Description: </span>
-        <span className='details lead'>{bookProps?.description}</span>
-      </div>
-      <br />
-      <div>
-        <span className='engrave lead'>ISBN: </span>
-        <span className='details lead'> {bookProps?.isbn}</span>
-      </div>
-      <div>
-        <span className='engrave lead'>Publisher: </span>
-        <span className='details lead'> {bookProps?.publisher}</span>
-      </div>
-      <div>
-        <span className='engrave lead'>Published on: </span>
-        <span className='details lead'>
-          {' '}
-          {new Date(bookProps?.publishedDate).toDateString()}
-        </span>
+            {new Date(bookProps?.publishedDate).toDateString()}
+          </span>
+        </div>
       </div>
 
       {user.role === 'admin' ? (
-        <div style={{ display: 'flex' }}>
+        <div>
           <Link
             to={`/edit-book/${bookId}`}
             className='lead engrave submit edit'>
@@ -146,9 +146,7 @@ const BookDetail = (): JSX.Element => {
           {bookProps?.copies === 0 ? (
             <Link to='/'>
               <h4 style={{ color: 'red' }} className='google-btn'>
-                No copies left.
-                <br />
-                Check back later.
+                No copies left. Check back later.
               </h4>
             </Link>
           ) : (
@@ -170,28 +168,13 @@ const BookDetail = (): JSX.Element => {
                       Borrow this book
                     </button>
                   )}
-                  {/* {isBorrowed === false ? (
-                    <button
-                      className='submit'
-                      onClick={() => onBorrowClick(bookId)}>
-                      Borrow this book
-                    </button>
-                  ) : (
-                    ''
-                  )}
-                  {isBorrowed ? (
-                    <button className='submit' onClick={() => onReturnClick()}>
-                      Return this book
-                    </button>
-                  ) : (
-                    ''
-                  )} */}
                 </div>
               )}
             </div>
           )}
         </div>
       )}
+      <p className='page-title lead emboss'>Book Details </p>
     </div>
   );
 };

@@ -17,7 +17,6 @@ function* registerSaga(form: RegisterActionType) {
     // console.log('Get type for response here', response);
     yield put(registerUserSuccess(response));
   } catch (error: any) {
-    // console.log('check n fix for error.response and below: ', error.response);
     yield put(registerUserError(error.response.data));
   }
 }

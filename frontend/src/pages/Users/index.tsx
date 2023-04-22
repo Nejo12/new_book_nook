@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -15,7 +15,8 @@ const Users = () => {
   }, [dispatch]);
 
   return (
-    <div className='listContainer p-2'>
+    <div className='page-container p-2'>
+      <p className='page-title lead emboss'>User List</p>
       {userList &&
         userList.map((user) => <UserCard key={uuidv4()} userData={user} />)}
     </div>

@@ -300,20 +300,20 @@ h2 {
 //  |--------------------------------------------------
 //  */
 .listContainer {
-  height: auto;
+  // height: auto;
+  // flex-wrap: wrap;
+  // max-width: 1280px;
+  // max-height: 80vh;
+  // position: fixed;
+  // overflow-y: scroll;
+  // margin: 2rem auto;
+  // position: relative;
+  // // border-radius: 2rem;
+  // border-radius: var(--border-radius);
+  // box-shadow: var(--box-shadow-inset);
   display: flex;
-  flex-wrap: wrap;
-  max-width: 1280px;
-  max-height: 80vh;
-  position: fixed;
-  overflow-y: scroll;
-  margin: 2rem auto;
-  position: relative;
   text-align: center;
-  // border-radius: 2rem;
-  border-radius: var(--border-radius);
   justify-content: center;
-  box-shadow: var(--box-shadow-inset);
 }
 
 //  /**
@@ -378,8 +378,9 @@ h2 {
 }
 
 .page-title {
-  padding-top: 2rem;
   text-align: center;
+  bottom: 20px;
+  position: fixed;
 }
 
 //  /**
@@ -397,19 +398,19 @@ h2 {
   box-shadow: var(--box-shadow-inset);
 }
 
-.back {
-  margin-left: 5rem;
-  height: 3rem;
-  padding: 0.3rem;
-  border-radius: 50%;
-  box-shadow: var(--box-shadow);
-  transition: 0.5s ease-out;
+// .back {
+//   margin-left: 5rem;
+//   height: 3rem;
+//   padding: 0.3rem;
+//   border-radius: 50%;
+//   box-shadow: var(--box-shadow);
+//   transition: 0.5s ease-out;
 
-  &:hover {
-    box-shadow: var(--box-shadow-focus);
-    padding: 0.4rem;
-  }
-}
+//   &:hover {
+//     box-shadow: var(--box-shadow-focus);
+//     padding: 0.4rem;
+//   }
+// }
 
 .note {
   background: var(--red);
@@ -417,15 +418,15 @@ h2 {
   font-weight: bold;
   width: 10%;
   display: inline;
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 8px;
+  margin: 16px 16px 16px 0;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
 }
 
 .copies {
   font-weight: 900;
-  color: var(--red);
+  margin-top: 24px;
 }
 
 .details {
@@ -456,7 +457,6 @@ h2 {
 .edit {
   padding: 1rem;
   appearance: none;
-  border-radius: 2rem;
   -webkit-appearance: none;
   background-color: var(--blue);
   transition: all 0.4s ease-in-out;
@@ -483,4 +483,59 @@ h2 {
   margin: 20px auto;
   animation: spin 1s linear infinite;
   -webkit-animation: spin 1s linear infinite;
+}
+
+// NEW CONTAINER
+
+.page-container {
+  height: 80vh;
+  width: 90vw;
+  max-width: 1280px;
+  max-height: 620px;
+
+  display: flex;
+  flex-wrap: wrap;
+  position: fixed;
+  margin: 32px auto;
+  overflow-y: scroll;
+  position: relative;
+  text-align: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-inset);
+}
+
+// BOOK DETAIL PAGE
+.back {
+  height: 48px;
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
+  transition: 0.5s ease-out;
+
+  &:hover {
+    box-shadow: var(--box-shadow-focus);
+    padding: 8px;
+  }
+}
+
+.nowrap {
+  display: flex;
+  height: 70%;
+  flex-direction: column;
+  text-align: left;
+  gap: 30px;
+  justify-content: space-around;
+  align-content: space-between;
+}
+
+.wrap {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.borrowed-container {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -70,7 +70,7 @@ const EditBook = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className='page-container p-2'>
       {state ? (
         <div>
           <Link to='/'>

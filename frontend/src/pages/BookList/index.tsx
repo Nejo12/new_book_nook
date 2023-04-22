@@ -19,7 +19,8 @@ const BookList = (): JSX.Element => {
   if (loading) <Spinner />;
 
   return (
-    <div className='listContainer p-2'>
+    <div className='page-container p-2'>
+      <p className='page-title lead emboss'>Book List</p>
       {bookList &&
         bookList.map((book: Book) => (
           <BookCard key={uuidv4()} bookData={book} />

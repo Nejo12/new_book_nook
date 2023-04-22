@@ -36,7 +36,7 @@ function* borrowBookSaga(action: any) {
       `${url}/api/borrows`,
       bookData,
     );
-    // console.log('response in borrowBookSaga:', response);
+    console.log('response in borrowBookSaga:', response);
     // yield put(action.borrowBookSuccess(response));
   } catch (error: any) {
     yield put(action.borrowBookFailure(error));
@@ -51,9 +51,7 @@ function* returnBookSaga(action: any) {
     const response: BookDetailResponse = yield axios.delete(
       `${url}/api/borrows/delete/` + bookId + '/' + borrowedId,
     );
-    // console.log('Get type for response returnBookSaga: ', response);
-    // @ts-ignore
-    // yield put(action.returnBookSuccess(response.data.msg));
+    // yield put(action.returnBookSuccess(response));
   } catch (error: any) {
     yield put(action.returnBookFailure(error));
   }

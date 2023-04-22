@@ -15,7 +15,6 @@ import { url } from '../../Routes';
 function* fetchBooksSaga() {
   try {
     const response: Book[] = yield call(fetchBooksService);
-    console.log('fetchBooksSaga response', response);
     yield put(fetchBooksSuccess(response));
   } catch (err) {
     yield put(fetchBooksError(err));
@@ -34,7 +33,6 @@ function* fetchBookDetailSaga(action: BookActionType) {
 
     const bookDetailsUrl = userId ? withUserIdUrl : noUserIdUrl;
     const response: Book = yield axios.get(bookDetailsUrl);
-    // console.log('response in fetchBookDetailSaga', response);
     yield put(fetchBookDetailSuccess(response));
   } catch (error) {
     yield put(fetchBookDetailFailure(error));

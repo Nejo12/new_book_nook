@@ -1,4 +1,4 @@
-import { ActionTypes, BookResponse, BookState } from '../../types/types';
+import { ActionTypes, BookState } from '../../types/types';
 import * as types from './../constants/index';
 
 const initialState: BookState = {
@@ -33,7 +33,6 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
       };
 
     case types.FETCH_BOOKS_SUCCESS:
-      console.log('FETCH_BOOKS_SUCCESS: ', payload);
       return {
         ...state,
         bookList: payload.data,

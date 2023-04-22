@@ -8,6 +8,7 @@ const initialState: UserState = {
 };
 
 const userReducer = (state = initialState, action: ActionTypes) => {
+  const payload = action.payload;
   switch (action.type) {
     case types.FETCH_USERS:
       return {
@@ -21,7 +22,7 @@ const userReducer = (state = initialState, action: ActionTypes) => {
         ...state,
         loading: false,
         errors: false,
-        userList: action.payload,
+        userList: payload,
       };
 
     case types.FETCH_USERS_FAILURE:

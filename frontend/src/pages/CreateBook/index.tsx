@@ -61,17 +61,12 @@ const CreateBook = ({ history }: any): JSX.Element => {
       .catch((err) => console.log('Error creating book', err));
   };
   return (
-    <div>
-      <Link to='/'>
-        <img
-          src='https://img.icons8.com/wired/64/000000/circled-left-2.png'
-          alt='back-btn'
-          className='back engrave'
-        />
-      </Link>
+    <div className='page-container'>
+      <p className='page-title lead emboss'>Create Book</p>
       <ToastContainer />
-      <div className='listContainer p-2'>
+      <div className='p-2'>
         <form
+          className='wrap'
           onSubmit={(e) => handleSubmit(e)}
           onChange={(e) => handleChange(e)}>
           <label>
@@ -109,11 +104,10 @@ const CreateBook = ({ history }: any): JSX.Element => {
           <label>
             <input type='number' name='copies' placeholder='Copies' />
           </label>
-
-          <button type='submit' className='submit normal'>
-            Submit
-          </button>
         </form>
+        <button type='submit' className='submit normal'>
+          Submit
+        </button>
       </div>
     </div>
   );
