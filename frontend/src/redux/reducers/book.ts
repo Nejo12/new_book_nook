@@ -1,4 +1,4 @@
-import { ActionTypes, BookResponse, BookState } from '../../types/types';
+import { ActionTypes, BookState } from '../../types/types';
 import * as types from './../constants/index';
 
 const initialState: BookState = {
@@ -6,16 +6,8 @@ const initialState: BookState = {
   error: '',
   msg: '',
   bookList: [],
-  data: {
-    _id: '',
-    title: '',
-    isbn: '',
-    description: '',
-    copies: 0,
-    author: '',
-    publisher: '',
-    publishedDate: '',
-  },
+  borrow: [],
+  isBorrowed: false,
   bookProps: {
     _id: '',
     title: '',
@@ -29,7 +21,7 @@ const initialState: BookState = {
 };
 
 const bookReducer = (state = initialState, action: ActionTypes) => {
-  const payload = action.payload as BookResponse;
+  const payload = action.payload;
 
   switch (action.type) {
     case types.FETCH_BOOKS_REQUEST:
@@ -43,7 +35,7 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
     case types.FETCH_BOOKS_SUCCESS:
       return {
         ...state,
-        data: payload,
+        bookList: payload.data,
         loading: false,
         errors: false,
       };
@@ -61,8 +53,10 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
         ...state,
         loading: false,
         errors: false,
-        data: payload.book,
+        bookProps: payload.data.book,
         // bookProps: { ...payload.book },
+        borrow: payload.data.borrow,
+        isBorrowed: payload.data.isBorrowed,
       };
 
     default:

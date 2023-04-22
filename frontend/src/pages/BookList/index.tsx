@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,18 +10,19 @@ import Spinner from '../../components/spinner';
 const BookList = (): JSX.Element => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state: AppState) => state.bookState);
-  const BookList = useSelector((state: AppState) => state.bookState.bookList);
+  const bookList = useSelector((state: AppState) => state.bookState.bookList);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchBooksRequest());
   }, [dispatch]);
 
   if (loading) <Spinner />;
 
   return (
-    <div className='listContainer p-2'>
-      {BookList &&
-        BookList.map((book: Book) => (
+    <div className='page-container p-2'>
+      <p className='page-title lead emboss'>Book List</p>
+      {bookList &&
+        bookList.map((book: Book) => (
           <BookCard key={uuidv4()} bookData={book} />
         ))}
     </div>

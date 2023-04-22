@@ -16,8 +16,8 @@ router.get('/', book.allBooks);
 // @access      Private
 router.post(
   '/',
-  auth,
-  roles.grantAccess('createOwn', 'profile'),
+  // auth,
+  // roles.grantAccess('createOwn', 'profile'),
   book.createBook,
 );
 
@@ -31,8 +31,8 @@ router.get('/:bookId', book.getBook);
 // @access      Private
 router.put(
   '/:bookId',
-  auth,
-  roles.grantAccess('updateAny', 'profile'),
+  // auth,
+  // roles.grantAccess('updateAny', 'profile'),
   book.updateBook,
 );
 
