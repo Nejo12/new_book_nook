@@ -1,4 +1,4 @@
-import { Borrow } from '../../types/types';
+import { BookList, BookResponse, Borrow } from '../../types/types';
 import * as types from '../constants';
 
 // ALREADY BORROWED BOOK
@@ -8,8 +8,7 @@ export const getBorrow = () => {
   };
 };
 
-// TODO: rectify the any s everywhere!!!!
-export const getBorrowSuccess = (data: any) => {
+export const getBorrowSuccess = (data: BookList) => {
   return {
     type: types.GET_BORROW_SUCCESS,
     payload: data,
@@ -31,7 +30,7 @@ export const borrowBook = (bookData: Borrow) => {
   };
 };
 
-export const borrowBookSuccess = (data: any) => {
+export const borrowBookSuccess = (data: BookResponse) => {
   return {
     type: types.BORROW_BOOK_SUCCESS,
     payload: data,
@@ -53,7 +52,7 @@ export const returnBook = (borrowId: string) => {
   };
 };
 
-export const returnBookSuccess = (data: any) => {
+export const returnBookSuccess = (data: BookList) => {
   return {
     type: types.RETURN_BOOK_SUCCESS,
     payload: data,

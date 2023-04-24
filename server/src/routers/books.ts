@@ -41,8 +41,8 @@ router.put(
 // @access      Private
 router.delete(
   '/:bookId',
-  auth,
-  roles.grantAccess('deleteAny', 'profile'),
+  // auth,
+  // roles.grantAccess('deleteAny', 'profile'),
   book.deleteBook,
 );
 

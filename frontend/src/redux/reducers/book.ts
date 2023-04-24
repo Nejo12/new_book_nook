@@ -54,7 +54,6 @@ const bookReducer = (state = initialState, action: ActionTypes) => {
         loading: false,
         errors: false,
         bookProps: payload.data.book,
-        // bookProps: { ...payload.book },
         borrow: payload.data.borrow,
         isBorrowed: payload.data.isBorrowed,
       };

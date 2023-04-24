@@ -82,9 +82,7 @@ const EditBook = (): JSX.Element => {
           </Link>
           <ToastContainer />
           <div className='listContainer p-2'>
-            <form
-              onSubmit={(e) => handleSubmit(e)}
-              onChange={(e) => handleChange(e)}>
+            <form onChange={(e) => handleChange(e)}>
               <label>
                 <input
                   type='text'
@@ -148,8 +146,11 @@ const EditBook = (): JSX.Element => {
                 />
               </label>
 
-              <button type='submit' className='submit normal'>
-                Submit
+              <button
+                type='submit'
+                className='submit normal'
+                onSubmit={(e) => handleSubmit(e)}>
+                Submit...
               </button>
             </form>
           </div>

@@ -11,36 +11,37 @@ const Borrowed = () => {
   const { _bookList, loading } = useSelector(
     (state: AppState) => state.borrowState,
   );
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBorrow());
   }, [dispatch]);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <div className='page-container p2'>
-      <p className='page-title lead emboss'>Borrowed List</p>
-      {_bookList.length === 3 ? (
-        <p className='copies'>
-          <span className='note hide-md'>NOTE: </span>
-          <span className='engrave'>You can't have more than 3 books</span>
-        </p>
+      {loading ? (
+        <Spinner />
       ) : (
-        ''
-      )}
-      {_bookList.length < 1 ? (
-        <h3 className='emboss center lead'>
-          You currently have no borrowed book
-        </h3>
-      ) : (
-        <div className='borrowed-container p-2'>
-          {_bookList.map((bookList: BookList) => (
-            <BookCard key={uuidv4()} bookData={bookList.books} />
-          ))}
+        <div>
+          <p className='page-title lead emboss'>Borrowed List</p>
+          {_bookList.length === 3 ? (
+            <p className='copies'>
+              <span className='note hide-md'>NOTE: </span>
+              <span className='engrave'>You can't have more than 3 books</span>
+            </p>
+          ) : (
+            ''
+          )}
+          {_bookList.length < 1 ? (
+            <h3 className='emboss center lead'>
+              You currently have no borrowed book
+            </h3>
+          ) : (
+            <div className='borrowed-container p-2'>
+              {_bookList.map((bookList: BookList) => (
+                <BookCard key={uuidv4()} bookData={bookList.books} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
