@@ -14,7 +14,6 @@ function* registerSaga(form: RegisterActionType) {
   const payload = form.payload;
   try {
     const response: User = yield call(registerUserService, payload);
-    // console.log('Get type for response here', response);
     yield put(registerUserSuccess(response));
   } catch (error: any) {
     yield put(registerUserError(error.response.data));

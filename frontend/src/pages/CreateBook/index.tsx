@@ -65,10 +65,7 @@ const CreateBook = ({ history }: any): JSX.Element => {
       <p className='page-title lead emboss'>Create Book</p>
       <ToastContainer />
       <div className='p-2'>
-        <form
-          className='wrap'
-          onSubmit={(e) => handleSubmit(e)}
-          onChange={(e) => handleChange(e)}>
+        <form className='wrap' onChange={(e) => handleChange(e)}>
           <label>
             <input type='text' name='title' placeholder='Book Title' />
           </label>
@@ -105,7 +102,10 @@ const CreateBook = ({ history }: any): JSX.Element => {
             <input type='number' name='copies' placeholder='Copies' />
           </label>
         </form>
-        <button type='submit' className='submit normal'>
+        <button
+          type='submit'
+          className='submit normal'
+          onSubmit={(e) => handleSubmit(e)}>
           Submit
         </button>
       </div>

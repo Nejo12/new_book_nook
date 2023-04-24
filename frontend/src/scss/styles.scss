@@ -430,7 +430,7 @@ h2 {
 }
 
 .details {
-  color: var(--red);
+  color: var(--grey-500);
   font-weight: 100;
 }
 .emboss {
@@ -460,9 +460,13 @@ h2 {
   -webkit-appearance: none;
   background-color: var(--blue);
   transition: all 0.4s ease-in-out;
+  height: 54px;
+  font-size: larger;
 }
 .red {
   background-color: var(--red);
+  height: 54px;
+  font-size: larger;
 }
 
 .spinner-overlay {
@@ -526,7 +530,7 @@ h2 {
   text-align: left;
   gap: 30px;
   justify-content: space-around;
-  align-content: space-between;
+  margin: 24px;
 }
 
 .wrap {

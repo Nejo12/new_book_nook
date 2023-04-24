@@ -128,8 +128,7 @@ export type BookResponse = {
   bookList: Book[];
   borrow: Borrow;
   isBorrowed: boolean;
-  bookList: any[];
-  data: any; // TODO: get rid of these any
+  data: BookList;
 };
 
 export type BorrowResponse = {

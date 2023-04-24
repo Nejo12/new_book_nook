@@ -95,10 +95,6 @@ const LoginAndRegistration = (): JSX.Element => {
         <button type='submit' className='submit normal'>
           Login
         </button>
-
-        <a href='api/users/auth/google' className='google-btn normal p3'>
-          Login with <span>GOOGLE</span>
-        </a>
       </form>
 
       <div className='sub-container'>
@@ -136,7 +132,7 @@ const LoginAndRegistration = (): JSX.Element => {
             <input
               type='text'
               name='lastName'
-              placeholder='Lost Name'
+              placeholder='Last Name'
               value={registerValues.lastName}
               onChange={handleRegisterChange}
             />
@@ -168,10 +164,6 @@ const LoginAndRegistration = (): JSX.Element => {
           <button type='submit' className='submit normal'>
             Register
           </button>
-
-          <a href='api/users/auth/google' className='google-btn normal'>
-            Login with <span>GOOGLE</span>
-          </a>
         </form>
       </div>
     </div>
