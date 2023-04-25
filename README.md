@@ -19,24 +19,26 @@
 - [x] Given that there are books in the library, all users can view the list of books and chose which book to borrow.
 - [x] Given that there are books in the library, users can choose a book to see the full details before deciding to add to his/her borrowed list.
 - [x] Given that user decides to borrow a book, user is directed to the login page. Since only the signed-in user can borrow books.
-- [x] On successful authentication, logged in user can add the preferred book to the borrowed list. Note: Borrowed list is only avalaible to authenticated users.
+- [x] On successful authentication, logged in user can add the preferred book to the borrowed list. Note: Borrowed or borrowing book list is only available to authenticated users.
 - [x] Given​ that there are more than one copy of a book in the library, one copy of the borrowed book is deducted from the library list.
 - [x] When a user selects an already borrowed book, returning this book is the optional button displayed to the user.
 - [x] When a user returns a book, the book is removed from his/her borrowed list, and the library reflects the updated stock of the book.
 - [x] Given that a user decides to return all borrowed books to the library, the user's borrowed list displays empty. With a clarifying message.
 - [x] Optional "add book button" is displayed for admin to create new book.
+- [x] Optional "edit book button" is displayed for admin to edit existing book.
+- [x] Optional "delete book button" is displayed for admin to remove existing book from the library.
 
 **NOTE:**
 
 - [-] Authentication is via [**JSON Web Tokens**](https://jwt.io/)
-- [-] Each authenticated user has a borrowing limit of 2 books at any point of time.
-- [-] Only 1 copy of a book can be borrowed by a user at any point of time
-- [-] Only the signed in user can Add book
+- [-] Each authenticated user has a borrowing limit of three (2) books at any point of time.
+- [-] Only 1 copy of a book can be borrowed by a user at any point of time.
+- [-] Only the signed in user can add/borrow book.
 
 #### Future features
 
 - Track your borrowing history.
-- Restrict admin access to add new book and modify existing book details.
+- include other authentication methods, such as google, facebook, github, etc.
 
 ## Quick Start
 
