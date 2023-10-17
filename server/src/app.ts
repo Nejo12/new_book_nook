@@ -11,7 +11,11 @@ import apiErrorHandler from './middlewares/apiErrorHandler';
 const app = express();
 
 // Use common 3rd-party middlewares
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,15 +29,12 @@ app.use(
 
 connectDB();
 
-// app.set('port', env.PORT || process.env.PORT || 3000); // PORT changed to 3000 as suggested by Adaptable deployment.
-
-// to enable retrieval and send ability of json
 app.use(express.json());
 
 // Use routers
-app.use('/api/users', routers.users);
-app.use('/api/books', routers.books);
-app.use('/api/borrows', routers.borrows);
+app.use('/api/users', cors(corsOptions), routers.users);
+app.use('/api/books', cors(corsOptions), routers.books);
+app.use('/api/borrows', cors(corsOptions), routers.borrows);
 
 // Custom API error handler
 app.use(apiErrorHandler);

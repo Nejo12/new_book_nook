@@ -22,11 +22,13 @@ const Borrowed = () => {
         <Spinner />
       ) : (
         <div>
-          <p className='page-title lead emboss'>Borrowed List</p>
+          {/* <p className='page-title lead emboss'>Borrowed List</p> */}
           {_bookList.length === 3 ? (
             <p className='copies'>
               <span className='note hide-md'>NOTE: </span>
-              <span className='engrave'>You can't have more than 3 books</span>
+              <span className='engrave red'>
+                You can't have more than 3 books.
+              </span>
             </p>
           ) : (
             ''

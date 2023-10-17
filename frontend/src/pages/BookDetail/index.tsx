@@ -171,7 +171,7 @@ const BookDetail = (): JSX.Element => {
               )}
             </div>
           )}
-          <p className='page-title lead emboss'>Book Details </p>
+          {/* <p className='page-title lead emboss'>Book Details </p> */}
         </div>
       )}
     </div>
